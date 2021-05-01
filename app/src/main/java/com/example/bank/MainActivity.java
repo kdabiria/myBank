@@ -27,12 +27,20 @@ public class MainActivity extends AppCompatActivity {
 
         loginButton = (Button) findViewById(R.id.login_id);
         register = (TextView) findViewById(R.id.reg_id);
+        register.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Log.v("Main", "reg clicked!!!!!!" );
+                startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
+            }
+        });
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.v("Main", "Login botton working!!!!!!" );
-                Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+                Intent intent = new Intent(getApplicationContext(), AccountInfo.class);
                 startActivity(intent);
             }
         });
