@@ -2,6 +2,7 @@ package com.example.bank;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -38,17 +39,45 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public boolean addData(String item, String item2, String item3, String item4, int item5) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(col1, item);
-        contentValues.put(col2, item2);
-        contentValues.put(col3, item3);
-        contentValues.put(col4, item4);
-        contentValues.put(col5, item5);
+        if (!checkUsername(item3)) {
+            SQLiteDatabase db = this.getWritableDatabase();
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(col1, item);
+            contentValues.put(col2, item2);
+            contentValues.put(col3, item3);
+            contentValues.put(col4, item4);
+            contentValues.put(col5, item5);
 
-        Log.d(TAG, "addData: Adding " + item + " " + item2 + " " + item3 + " " + item4 + " " + item5 + " to " + TABLE_NAME);
-        long result = db.insert(TABLE_NAME, null, contentValues);
+            Log.d(TAG, "addData: Adding " + item + " " + item2 + " " + item3 + " " + item4 + " " + item5 + " to " + TABLE_NAME);
+            long result = db.insert(TABLE_NAME, null, contentValues);
 
-        return result != -1;
+            return result != -1;
+        }
+
+        return false;
+    }
+
+    public boolean checkUsername(String user) {
+        String query = "SELECT USERNAME FROM " + TABLE_NAME + " WHERE "+ col3 + " = ?";
+        String[] whereArgs = {user};
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, whereArgs);
+
+        int count = cursor.getCount();
+
+        return count >= 1;
+    }
+
+    public boolean checkPassword(String pass) {
+        String query = "SELECT PASSWORD FROM " + TABLE_NAME + " WHERE "+ col4 + " = ?";
+        String[] whereArgs = {pass};
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, whereArgs);
+
+        int count = cursor.getCount();
+
+        return count >= 1;
     }
 }
