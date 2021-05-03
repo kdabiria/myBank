@@ -17,9 +17,11 @@ import android.widget.TextView;
 
 public class AccountInfo extends AppCompatActivity {
 
+    private final static String TAG = "AccountInfo";
     private TextView balance;
     private Button deposit;
     private Button withdraw;
+    private Button logout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +32,13 @@ public class AccountInfo extends AppCompatActivity {
         balance = (TextView) findViewById(R.id.balance_id);
         deposit = (Button) findViewById(R.id.deposit_id);
         withdraw = (Button) findViewById(R.id.withdraw_id);
+        logout = (Button) findViewById(R.id.logout_button_id);
 
         deposit.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                Log.v("AccountInfo", "Deposite clicked!!!");
+                Log.v(TAG, "Deposite clicked!!!");
                 startActivity(new Intent(getApplicationContext(), DepositMoney.class));
             }
         });
@@ -44,8 +47,16 @@ public class AccountInfo extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Log.v("AccountInfo", "withdraw clicked!!!");
+                Log.v(TAG, "withdraw clicked!!!");
                 startActivity(new Intent(getApplicationContext(), WithdrawMoney.class));
+            }
+        });
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.v(TAG, "withdraw clicked!!!");
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }
         });
 
