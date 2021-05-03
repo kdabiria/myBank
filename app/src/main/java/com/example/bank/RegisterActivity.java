@@ -42,8 +42,9 @@ public class RegisterActivity extends AppCompatActivity {
                 String newEntry2 = lastName.getText().toString();
                 String newEntry3 = username.getText().toString();
                 String newEntry4 = password.getText().toString();
+                int newEntry5 = 1000;
                 if(username.length() != 0) {
-                    check = AddData(newEntry, newEntry2, newEntry3, newEntry4);
+                    check = AddData(newEntry, newEntry2, newEntry3, newEntry4, newEntry5);
                     Log.d(TAG, check + "!!!!!");
                     if(check)
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
@@ -57,8 +58,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    public boolean AddData(String newEntry, String newEntry2, String newEntry3, String newEntry4) {
-        boolean insertData = mDatabaseHelper.addData(newEntry, newEntry2, newEntry3, newEntry4 );
+    public boolean AddData(String newEntry, String newEntry2, String newEntry3, String newEntry4, int newEntry5) {
+        boolean insertData = mDatabaseHelper.addData(newEntry, newEntry2, newEntry3, newEntry4, newEntry5 );
 
         if(insertData) {
             toastMeesage("Successfully Created Account!");

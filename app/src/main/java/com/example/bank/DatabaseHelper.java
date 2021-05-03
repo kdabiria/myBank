@@ -18,6 +18,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String col2 = "LASTNAME";
     private static final String col3 = "USERNAME";
     private static final String col4 = "PASSWORD";
+    private static final String col5 = "BALANCE";
 
     public DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null,1);
@@ -25,7 +26,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTable = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT,FIRSTNAME TEXT,LASTNAME TEXT, USERNAME TEXT, PASSWORD TEXT)";
+        String createTable = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT,FIRSTNAME TEXT,LASTNAME TEXT, USERNAME TEXT, PASSWORD TEXT, BALANCE DECIMAL(5,2))";
         db.execSQL(createTable);
 
     }
@@ -36,15 +37,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             onCreate(db);
     }
 
-    public boolean addData(String item, String item2, String item3, String item4 ) {
+    public boolean addData(String item, String item2, String item3, String item4, int item5) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(col1, item);
         contentValues.put(col2, item2);
         contentValues.put(col3, item3);
         contentValues.put(col4, item4);
+        contentValues.put(col5, item5);
 
-        Log.d(TAG, "addData: Adding " + item + " " + item2 + " " + item3 + " " + item4 + " to " + TABLE_NAME);
+        Log.d(TAG, "addData: Adding " + item + " " + item2 + " " + item3 + " " + item4 + " " + item5 + " to " + TABLE_NAME);
         long result = db.insert(TABLE_NAME, null, contentValues);
 
         return result != -1;
