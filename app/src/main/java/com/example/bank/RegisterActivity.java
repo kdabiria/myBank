@@ -47,7 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
                     check = AddData(newEntry, newEntry2, newEntry3, newEntry4, newEntry5);
                     Log.d(TAG, check + "!!!!!");
                     if(check)
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        startActivity(new Intent(getApplicationContext(), AccountInfo.class));
                 }
                 else
                     toastMeesage("You must put something in the text field!");
