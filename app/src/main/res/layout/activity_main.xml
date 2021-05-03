@@ -30,7 +30,7 @@
         android:layout_marginTop="61dp"
         android:layout_marginEnd="99dp"
         android:layout_marginRight="99dp"
-        android:drawableLeft="@drawable/ic_action_name"
+        android:drawableLeft="@drawable/ic_action_user"
         android:ems="10"
         android:hint="Username"
         android:inputType="textPersonName"
