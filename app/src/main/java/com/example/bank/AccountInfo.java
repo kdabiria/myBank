@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class AccountInfo extends AppCompatActivity {
 
@@ -77,5 +78,11 @@ public class AccountInfo extends AppCompatActivity {
 
     private void updateBalance() {
         balance.setText(String.valueOf(dbHelper.getBalance(username)));
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Toast.makeText(AccountInfo.this, "Logout out", Toast.LENGTH_SHORT).show();
     }
 }

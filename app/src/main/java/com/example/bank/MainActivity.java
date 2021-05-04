@@ -54,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
                     Bundle bundle = new Bundle();
                     bundle.putString("username", username.getText().toString());
                     intent.putExtras(bundle);
+                    username.setText("");
+                    password.setText("");
                     startActivity(intent);
                 }
             }
@@ -81,5 +83,10 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return false;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(MainActivity.this, "Cannot go back!", Toast.LENGTH_SHORT).show();
     }
 }
