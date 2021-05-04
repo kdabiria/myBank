@@ -18,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
     private Button loginButton;
     private TextView register;
     DatabaseHelper dbhelper;
+    private String customerID;
+    private String customerBalance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +48,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.v("Main", "Login botton working!!!!!!" );
                 boolean check = loginCheck();
-
                 if(check) {
+//                    Account acc = new Account(Float.parseFloat(customerBalance) ,0, customerID);
                     Intent intent = new Intent(getApplicationContext(), AccountInfo.class);
 
                     //create bundle to pass info
                     Bundle bundle = new Bundle();
                     bundle.putString("username", username.getText().toString());
+                    bundle.putString("customerID", customerID);
+                    bundle.putString("customerBalance", customerBalance);
                     intent.putExtras(bundle);
                     username.setText("");
                     password.setText("");
@@ -72,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
         else {
             boolean checkUse = dbhelper.checkUsername(user);
             boolean checkPass = dbhelper.checkPassword(pass);
+            customerID = dbhelper.getID(user);
+            customerBalance = dbhelper.getBalance(user);
 
             if (checkUse && checkPass) {
                 Toast.makeText(MainActivity.this, "Login successfully", Toast.LENGTH_SHORT).show();

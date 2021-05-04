@@ -59,6 +59,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return false;
     }
 
+    public void updateBalance(String item, String id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(col5,item);
+
+        Log.d(TAG, "addData: Adding " + item + " to " + TABLE_NAME);
+
+        db.update(TABLE_NAME, contentValues,"ID = ?", new String[]{id});
+    }
+
     public boolean checkUsername(String user) {
         String query = "SELECT USERNAME FROM " + TABLE_NAME + " WHERE "+ col3 + " = ?";
         String[] whereArgs = {user};
@@ -97,5 +107,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         Log.d(TAG, "checking the value for balance : " + amount);
         return amount;
+    }
+
+    public String getID(String user) {
+        String id = "NONE";
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + col3 + " = ?";
+        String[] whereArgs = {user};
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, whereArgs);
+
+        ArrayList<String> res = new ArrayList<>();
+        while (cursor.moveToNext())
+            id = cursor.getString(0);
+
+        Log.d(TAG, "checking the value for balance : " + id);
+        return id;
     }
 }

@@ -1,5 +1,6 @@
 package com.example.bank;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -25,6 +26,9 @@ public class AccountInfo extends AppCompatActivity {
     private Button logout;
     DatabaseHelper dbHelper;
     String username;
+    String customerID;
+    float customerBalance;
+
 
     private TextView check;
 
@@ -35,9 +39,10 @@ public class AccountInfo extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         username = bundle.getString("username");
+        customerID = bundle.getString("customerID");
+        customerBalance = Float.parseFloat(bundle.getString("customerBalance"));
 
         dbHelper = new DatabaseHelper(this);
-
 
         balance = (TextView) findViewById(R.id.balance_id);
         deposit = (Button) findViewById(R.id.deposit_id);
@@ -53,7 +58,13 @@ public class AccountInfo extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.v(TAG, "Deposite clicked!!!");
-                startActivity(new Intent(getApplicationContext(), DepositMoney.class));
+                Intent intent = new Intent(getApplicationContext(), DepositMoney.class);
+                Bundle bundle1 = new Bundle();
+                bundle1.putString("username", username);
+                bundle1.putString("customerID",customerID);
+                bundle1.putString("customerBalance", bundle.getString("customerBalance"));
+                intent.putExtras(bundle1);
+                startActivity(intent);
             }
         });
 
@@ -77,7 +88,9 @@ public class AccountInfo extends AppCompatActivity {
     }
 
     private void updateBalance() {
-        balance.setText(String.valueOf(dbHelper.getBalance(username)));
+        Log.d(TAG, "UPDATED THE BALANCE");
+        String checkBalance = String.valueOf(dbHelper.getBalance(username));
+        balance.setText(checkBalance);
     }
 
     @Override
