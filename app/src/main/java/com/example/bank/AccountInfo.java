@@ -22,17 +22,30 @@ public class AccountInfo extends AppCompatActivity {
     private Button deposit;
     private Button withdraw;
     private Button logout;
+    DatabaseHelper dbHelper;
+    String username;
+
+    private TextView check;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_info);
 
+        Bundle bundle = getIntent().getExtras();
+        username = bundle.getString("username");
+
+        dbHelper = new DatabaseHelper(this);
+
 
         balance = (TextView) findViewById(R.id.balance_id);
         deposit = (Button) findViewById(R.id.deposit_id);
         withdraw = (Button) findViewById(R.id.withdraw_id);
         logout = (Button) findViewById(R.id.logout_button_id);
+
+        check = (TextView) findViewById(R.id.check_id);
+        check.setText(username);
+        updateBalance();
 
         deposit.setOnClickListener(new View.OnClickListener() {
 
@@ -60,5 +73,9 @@ public class AccountInfo extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void updateBalance() {
+        balance.setText(String.valueOf(dbHelper.getBalance(username)));
     }
 }

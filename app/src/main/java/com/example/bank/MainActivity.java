@@ -47,8 +47,15 @@ public class MainActivity extends AppCompatActivity {
                 Log.v("Main", "Login botton working!!!!!!" );
                 boolean check = loginCheck();
 
-                if(check)
-                    startActivity(new Intent(getApplicationContext(), AccountInfo.class));
+                if(check) {
+                    Intent intent = new Intent(getApplicationContext(), AccountInfo.class);
+
+                    //create bundle to pass info
+                    Bundle bundle = new Bundle();
+                    bundle.putString("username", username.getText().toString());
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
             }
         });
     }

@@ -9,6 +9,8 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String TAG = "DatabaseHelper";
@@ -27,7 +29,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTable = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT,FIRSTNAME TEXT,LASTNAME TEXT, USERNAME TEXT, PASSWORD TEXT, BALANCE DECIMAL(5,2))";
+        String createTable = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT,FIRSTNAME TEXT,LASTNAME TEXT, USERNAME TEXT, PASSWORD TEXT, BALANCE TEXT)";
         db.execSQL(createTable);
 
     }
@@ -79,5 +81,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         int count = cursor.getCount();
 
         return count >= 1;
+    }
+
+    public String getBalance(String user) {
+        String amount = "0";
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + col3 + " = ?";
+        String[] whereArgs = {user};
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, whereArgs);
+
+        ArrayList<String> res = new ArrayList<>();
+        while (cursor.moveToNext())
+            amount = cursor.getString(5);
+
+        Log.d(TAG, "checking the value for balance : " + amount);
+        return amount;
     }
 }
