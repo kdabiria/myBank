@@ -2,32 +2,31 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/withdraw_frag_id"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/cardview_dark_background"
-    tools:context=".WithdrawMoney">
+    tools:context=".DepositMoney">
 
-
-    <TextView
-        android:id="@+id/amount_withdraw_id"
+    <EditText
+        android:id="@+id/withdraw_money_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="253dp"
-        android:text="Amount"
-        android:textColor="#FFFFFF"
-        android:textSize="36sp"
+        android:layout_marginTop="280dp"
+        android:ems="10"
+        android:hint="Amount"
+        android:inputType="numberDecimal"
+        android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/confirm_withdraw_id"
+        android:id="@+id/withdraw_confirm_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="385dp"
+        android:layout_marginTop="391dp"
         android:text="Confirm"
-        app:backgroundTint="#6C6969"
+        app:backgroundTint="#555454"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

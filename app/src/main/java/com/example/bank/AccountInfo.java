@@ -73,7 +73,13 @@ public class AccountInfo extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.v(TAG, "withdraw clicked!!!");
-                startActivity(new Intent(getApplicationContext(), WithdrawMoney.class));
+                Intent intent = new Intent(getApplicationContext(), WithdrawMoney.class);
+                Bundle bundle1 = new Bundle();
+                bundle1.putString("username", username);
+                bundle1.putString("customerID",customerID);
+                bundle1.putString("customerBalance", bundle.getString("customerBalance"));
+                intent.putExtras(bundle1);
+                startActivity(intent);
             }
         });
 

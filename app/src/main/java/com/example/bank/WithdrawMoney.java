@@ -1,43 +1,56 @@
 package com.example.bank;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.EditText;
+import android.widget.Toast;
 
+public class WithdrawMoney extends AppCompatActivity {
 
-public class WithdrawMoney extends Fragment {
+    private final static String TAG = "WithdrawMoney";
 
-    private TextView amount;
+    private EditText amount;
     private Button confirm;
-
-    public WithdrawMoney() {
-        // Required empty public constructor
-    }
-
-
+    DatabaseHelper dbHelper;
+    private String oldbalance;
+    private String addAmount;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_withdraw_money, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_withdraw_money);
 
-        confirm = (Button) confirm.findViewById(R.id.confirm_withdraw_id);
+        addAmount = "0";
+        dbHelper = new DatabaseHelper(this);
+
+        amount = (EditText) findViewById(R.id.withdraw_money_id);
+        confirm = (Button) findViewById(R.id.withdraw_confirm_id);
+
+        Bundle bundle = getIntent().getExtras();
 
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.v("WithdrawFrag", "Withdraw click frag worki!!");
+                Toast.makeText(WithdrawMoney.this,  "Withdraw made", Toast.LENGTH_SHORT).show();
+
+                oldbalance = dbHelper.getBalance(bundle.getString("username"));
+                Log.d(TAG, "CHECKING the new amount of oldbalance: " + oldbalance);
+                float newBalance = Float.parseFloat(oldbalance) - Float.parseFloat(amount.getText().toString());
+                Log.d(TAG, "CHECKING the new amount of NEW balance: " + newBalance);
+                updateDB(String.valueOf(newBalance), bundle.getString("customerID"));
+                Intent intent = new Intent(getApplicationContext(), AccountInfo.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
+    }
 
-        return v;
+    private void updateDB(String balance, String id) {
+        dbHelper.updateBalance(balance, id);
     }
 }
