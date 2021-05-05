@@ -31,7 +31,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String createTable = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT,FIRSTNAME TEXT,LASTNAME TEXT, USERNAME TEXT, PASSWORD TEXT, BALANCE TEXT)";
         db.execSQL(createTable);
-
+        createAdmin(db);
     }
 
     @Override
@@ -40,6 +40,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             onCreate(db);
     }
 
+    private void createAdmin(SQLiteDatabase db) {
+        Log.d(TAG, "ADMIN CREATED!!");
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(col1, (byte[]) null);
+        contentValues.put(col2, (byte[]) null);
+        contentValues.put(col3, "admin");
+        contentValues.put(col4, "iam@admin");
+        contentValues.put(col5, (byte[]) null);
+
+        db.insert(TABLE_NAME,null, contentValues);
+    }
     public boolean addData(String item, String item2, String item3, String item4, int item5) {
         if (!checkUsername(item3)) {
             SQLiteDatabase db = this.getWritableDatabase();

@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.v("Main", "Login botton working!!!!!!" );
                 boolean check = loginCheck();
-                if(check) {
+                if(check && !username.getText().toString().equals("admin")) {
 //                    Account acc = new Account(Float.parseFloat(customerBalance) ,0, customerID);
                     Intent intent = new Intent(getApplicationContext(), AccountInfo.class);
 
@@ -61,6 +61,9 @@ public class MainActivity extends AppCompatActivity {
                     username.setText("");
                     password.setText("");
                     startActivity(intent);
+                }
+                else{
+                    startActivity(new Intent(getApplicationContext(), Admin.class));
                 }
             }
         });
