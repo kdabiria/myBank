@@ -37,15 +37,18 @@ public class WithdrawMoney extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(WithdrawMoney.this,  "Withdraw made", Toast.LENGTH_SHORT).show();
-
-                oldbalance = dbHelper.getBalance(bundle.getString("username"));
-                Log.d(TAG, "CHECKING the new amount of oldbalance: " + oldbalance);
-                float newBalance = Float.parseFloat(oldbalance) - Float.parseFloat(amount.getText().toString());
-                Log.d(TAG, "CHECKING the new amount of NEW balance: " + newBalance);
-                updateDB(String.valueOf(newBalance), bundle.getString("customerID"));
-                Intent intent = new Intent(getApplicationContext(), AccountInfo.class);
-                intent.putExtras(bundle);
-                startActivity(intent);
+                if(amount.getText().toString().startsWith("0"))
+                    Toast.makeText(WithdrawMoney.this, "Cannot have leading 0", Toast.LENGTH_SHORT).show();
+                else {
+                    oldbalance = dbHelper.getBalance(bundle.getString("username"));
+                    Log.d(TAG, "CHECKING the new amount of oldbalance: " + oldbalance);
+                    float newBalance = Float.parseFloat(oldbalance) - Float.parseFloat(amount.getText().toString());
+                    Log.d(TAG, "CHECKING the new amount of NEW balance: " + newBalance);
+                    updateDB(String.valueOf(newBalance), bundle.getString("customerID"));
+                    Intent intent = new Intent(getApplicationContext(), AccountInfo.class);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
             }
         });
     }

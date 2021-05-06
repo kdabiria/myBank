@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "lalalala!!!!!!!!!!!!!" + checkUse + checkPass);
                 //            boolean checkUse = dbhelper.checkUsername(user);
                 //            boolean checkPass = dbhelper.checkPassword(pass);
-                //            customerID = dbhelper.getID(user);
+                customerID = dbhelper.getID(user);
                 customerBalance = dbhelper.getBalance(user);
 
                 //            if (checkUse && checkPass) {
