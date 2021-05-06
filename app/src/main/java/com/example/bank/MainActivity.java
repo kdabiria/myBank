@@ -11,14 +11,18 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
+    private final static String TAG = "MainActivity";
     private EditText username;
     private EditText password;
     private Button loginButton;
     private TextView register;
     DatabaseHelper dbhelper;
     private String customerID;
+    private String username_db;
     private String customerBalance;
 
     @Override
@@ -48,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.v("Main", "Login botton working!!!!!!" );
                 boolean check = loginCheck();
-                if(check && !username.getText().toString().equals("admin")) {
+                if(check && !username_db.equals("admin")) {
 //                    Account acc = new Account(Float.parseFloat(customerBalance) ,0, customerID);
                     Intent intent = new Intent(getApplicationContext(), AccountInfo.class);
 
@@ -62,8 +66,9 @@ public class MainActivity extends AppCompatActivity {
                     password.setText("");
                     startActivity(intent);
                 }
-                else{
-                    startActivity(new Intent(getApplicationContext(), Admin.class));
+                else if (username_db.equals("admin")){
+                    if (loginCheck())
+                        startActivity(new Intent(getApplicationContext(), Admin.class));
                 }
             }
         });
@@ -77,19 +82,31 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, "Fields can't be null", Toast.LENGTH_SHORT).show();
         }
         else {
-            boolean checkUse = dbhelper.checkUsername(user);
-            boolean checkPass = dbhelper.checkPassword(pass);
-            customerID = dbhelper.getID(user);
-            customerBalance = dbhelper.getBalance(user);
+            try {
 
-            if (checkUse && checkPass) {
-                Toast.makeText(MainActivity.this, "Login successfully", Toast.LENGTH_SHORT).show();
-                return true;
+
+                ArrayList<String> res = dbhelper.checkUserPass(user, pass);
+                username_db = res.get(0);
+                String checkUse = res.get(0);
+                String checkPass = res.get(1);
+                Log.d(TAG, "lalalala!!!!!!!!!!!!!" + checkUse + checkPass);
+                //            boolean checkUse = dbhelper.checkUsername(user);
+                //            boolean checkPass = dbhelper.checkPassword(pass);
+                //            customerID = dbhelper.getID(user);
+                customerBalance = dbhelper.getBalance(user);
+
+                //            if (checkUse && checkPass) {
+                if (!checkPass.isEmpty() && !checkUse.isEmpty()) {
+                    Toast.makeText(MainActivity.this, "Login successfully", Toast.LENGTH_SHORT).show();
+                    return true;
+                } else {
+                    Toast.makeText(MainActivity.this, "failed to login, try again", Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            else {
-                Toast.makeText(MainActivity.this, "failed to login, try again", Toast.LENGTH_SHORT).show();
-                return false;
-            }
+
         }
         return false;
     }

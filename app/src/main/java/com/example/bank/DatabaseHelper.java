@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -80,6 +81,31 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.update(TABLE_NAME, contentValues,"ID = ?", new String[]{id});
     }
 
+    public ArrayList<String> checkUserPass(String user, String pass) {
+        ArrayList<String> res = new ArrayList<>();
+        String temp = "";
+        String temp2 = "";
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE USERNAME = '" + user + "' AND PASSWORD = '" + pass + "'";
+        try {
+
+            Cursor cursor = db.rawQuery(query, null);
+            while (cursor.moveToNext()) {
+                temp = cursor.getString(3);
+                temp2 = cursor.getString(4);
+            }
+            res.add(temp);
+            res.add(temp2);
+
+        } catch (Exception e) {
+
+        }
+
+        return res;
+    }
+
+
     public boolean checkUsername(String user) {
         String query = "SELECT USERNAME FROM " + TABLE_NAME + " WHERE "+ col3 + " = ?";
         String[] whereArgs = {user};
@@ -92,17 +118,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return count >= 1;
     }
 
-    public boolean checkPassword(String pass) {
-        String query = "SELECT PASSWORD FROM " + TABLE_NAME + " WHERE "+ col4 + " = ?";
-        String[] whereArgs = {pass};
-
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(query, whereArgs);
-
-        int count = cursor.getCount();
-
-        return count >= 1;
-    }
 
     public String getBalance(String user) {
         String amount = "0";
