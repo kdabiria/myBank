@@ -127,12 +127,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, whereArgs);
 
-        ArrayList<String> res = new ArrayList<>();
         while (cursor.moveToNext())
             amount = cursor.getString(5);
 
         Log.d(TAG, "checking the value for balance : " + amount);
         return amount;
+    }
+
+    public String getFirstName(String user) {
+        String fname = "";
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + col3 + " = ?";
+        String[] whereArgs = {user};
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, whereArgs);
+
+        while (cursor.moveToNext())
+            fname = cursor.getString(1);
+
+        Log.d(TAG, "checking the value for balance : " + fname);
+        return fname;
     }
 
     public String getID(String user) {

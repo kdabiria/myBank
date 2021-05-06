@@ -4,12 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentManager;
 
 import android.util.Log;
 import android.view.View;
@@ -30,8 +25,9 @@ public class AccountInfo extends AppCompatActivity {
     float customerBalance;
 
 
-    private TextView check;
+    private TextView name;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,8 +45,8 @@ public class AccountInfo extends AppCompatActivity {
         withdraw = (Button) findViewById(R.id.withdraw_id);
         logout = (Button) findViewById(R.id.logout_button_id);
 
-        check = (TextView) findViewById(R.id.check_id);
-        check.setText(username);
+        name = (TextView) findViewById(R.id.fnam_id);
+        name.setText("Welcome " + dbHelper.getFirstName(username));
         updateBalance();
 
         deposit.setOnClickListener(new View.OnClickListener() {
