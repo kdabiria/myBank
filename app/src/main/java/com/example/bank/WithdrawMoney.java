@@ -33,21 +33,30 @@ public class WithdrawMoney extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
 
+
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(amount.getText().toString().startsWith("0"))
                     Toast.makeText(WithdrawMoney.this, "Cannot have leading 0", Toast.LENGTH_SHORT).show();
+                else if (amount.getText().toString().length() == 0)
+                    Toast.makeText(WithdrawMoney.this, "No entry", Toast.LENGTH_SHORT).show();
                 else {
-                    Toast.makeText(WithdrawMoney.this,  "Withdraw made", Toast.LENGTH_SHORT).show();
                     oldbalance = dbHelper.getBalance(bundle.getString("username"));
+
                     Log.d(TAG, "CHECKING the new amount of oldbalance: " + oldbalance);
-                    float newBalance = Float.parseFloat(oldbalance) - Float.parseFloat(amount.getText().toString());
-                    Log.d(TAG, "CHECKING the new amount of NEW balance: " + newBalance);
-                    updateDB(String.valueOf(newBalance), bundle.getString("customerID"));
-                    Intent intent = new Intent(getApplicationContext(), AccountInfo.class);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
+
+                    if(check(oldbalance, addAmount)) {
+                        Toast.makeText(WithdrawMoney.this,  "Withdraw made", Toast.LENGTH_SHORT).show();
+                        float newBalance = Float.parseFloat(oldbalance) - Float.parseFloat(amount.getText().toString());
+                        updateDB(String.valueOf(newBalance), bundle.getString("customerID"));
+                        Intent intent = new Intent(getApplicationContext(), AccountInfo.class);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    }
+                    else {
+                        Toast.makeText(WithdrawMoney.this, "Do not have enough money", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -55,5 +64,10 @@ public class WithdrawMoney extends AppCompatActivity {
 
     private void updateDB(String balance, String id) {
         dbHelper.updateBalance(balance, id);
+    }
+
+    private boolean check(String oldbalance, String addAmount) {
+        float newBalance = Float.parseFloat(oldbalance) - Float.parseFloat(amount.getText().toString());
+        return newBalance > 0;
     }
 }
