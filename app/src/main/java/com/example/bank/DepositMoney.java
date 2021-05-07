@@ -38,6 +38,8 @@ public class DepositMoney extends AppCompatActivity {
                 Log.d(TAG, "CHECKING the new amount of oldbalance: " + oldbalance);
                 if(amount.getText().toString().startsWith("0"))
                     Toast.makeText(DepositMoney.this, "Cannot have leading 0", Toast.LENGTH_SHORT).show();
+                else if (amount.getText().toString().length() == 0)
+                    Toast.makeText(DepositMoney.this, "No entry", Toast.LENGTH_SHORT).show();
                 else{
                     Toast.makeText(DepositMoney.this, "Deposit made", Toast.LENGTH_SHORT).show();
                     float newBalance = Float.parseFloat(oldbalance) + Float.parseFloat(amount.getText().toString());
