@@ -44,11 +44,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private void createAdmin(SQLiteDatabase db) {
         Log.d(TAG, "ADMIN CREATED!!");
         ContentValues contentValues = new ContentValues();
-        contentValues.put(col1, (byte[]) null);
-        contentValues.put(col2, (byte[]) null);
+//        contentValues.put(col1, (byte[]) null);
+        contentValues.put(col1, "admin");
+//        contentValues.put(col2, (byte[]) null);
+        contentValues.put(col2, "admin");
         contentValues.put(col3, "admin");
         contentValues.put(col4, "iam@admin");
-        contentValues.put(col5, (byte[]) null);
+//        contentValues.put(col5, (byte[]) null);
+        contentValues.put(col5, "admin");
 
         db.insert(TABLE_NAME,null, contentValues);
     }
@@ -163,5 +166,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         Log.d(TAG, "checking the value for balance : " + id);
         return id;
+    }
+
+    public Cursor getAllData() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME;
+        Cursor data = db.rawQuery(query,null);
+        return data;
     }
 }
