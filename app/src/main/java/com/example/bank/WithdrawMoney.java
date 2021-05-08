@@ -68,6 +68,6 @@ public class WithdrawMoney extends AppCompatActivity {
 
     private boolean check(String oldbalance, String addAmount) {
         float newBalance = Float.parseFloat(oldbalance) - Float.parseFloat(amount.getText().toString());
-        return newBalance > 0;
+        return newBalance >= 0;
     }
 }

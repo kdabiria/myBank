@@ -94,7 +94,7 @@ public class AccountInfo extends AppCompatActivity {
         String checkBalance = String.valueOf(dbHelper.getBalance(username));
         float numBalance = Float.parseFloat(checkBalance);
         Log.d(TAG, "FLOAT value  : " + numBalance);
-        balance.setText(String.format("%.2f", numBalance));
+        balance.setText("Balance:" + String.format("%.2f", numBalance));
     }
 
     @Override
