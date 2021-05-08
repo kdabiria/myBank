@@ -99,8 +99,7 @@ public class AccountInfo extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        Toast.makeText(AccountInfo.this, "Logout out", Toast.LENGTH_SHORT).show();
+        Toast.makeText(AccountInfo.this, "Cannot go back", Toast.LENGTH_SHORT).show();
     }
 
 }
