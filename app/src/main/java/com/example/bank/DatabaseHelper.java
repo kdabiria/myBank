@@ -55,7 +55,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.insert(TABLE_NAME,null, contentValues);
     }
-    public boolean addData(String item, String item2, String item3, String item4, int item5) {
+    public boolean addData(String item, String item2, String item3, String item4, Float item5) {
         if (!checkUsername(item3)) {
             SQLiteDatabase db = this.getWritableDatabase();
             ContentValues contentValues = new ContentValues();

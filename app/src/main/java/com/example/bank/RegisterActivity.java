@@ -16,6 +16,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText firstName;
     private EditText lastName;
     private EditText username;
+    private EditText balance;
     private EditText password;
     private Button createAcc;
     DatabaseHelper mDatabaseHelper;
@@ -31,6 +32,7 @@ public class RegisterActivity extends AppCompatActivity {
         lastName = (EditText) findViewById(R.id.lastName_id);
         username = (EditText) findViewById(R.id.Username_id);
         password = (EditText) findViewById(R.id.reg_password_id);
+        balance = (EditText) findViewById(R.id.reg_balance_id);
         createAcc = (Button) findViewById(R.id.create_acc_id);
 
         mDatabaseHelper = new DatabaseHelper(this);
@@ -42,7 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String newEntry2 = lastName.getText().toString();
                 String newEntry3 = username.getText().toString();
                 String newEntry4 = password.getText().toString();
-                int newEntry5 = 1000;
+                Float newEntry5 = Float.parseFloat(balance.getText().toString());
                 if(username.length() != 0) {
                     check = AddData(newEntry, newEntry2, newEntry3, newEntry4, newEntry5);
                     Log.d(TAG, check + "!!!!!");
@@ -58,7 +60,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    public boolean AddData(String newEntry, String newEntry2, String newEntry3, String newEntry4, int newEntry5) {
+    public boolean AddData(String newEntry, String newEntry2, String newEntry3, String newEntry4, Float newEntry5) {
         boolean insertData = mDatabaseHelper.addData(newEntry, newEntry2, newEntry3, newEntry4, newEntry5 );
 
         if(insertData) {

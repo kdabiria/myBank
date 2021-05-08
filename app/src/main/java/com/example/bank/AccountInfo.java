@@ -102,4 +102,5 @@ public class AccountInfo extends AppCompatActivity {
         super.onBackPressed();
         Toast.makeText(AccountInfo.this, "Logout out", Toast.LENGTH_SHORT).show();
     }
+
 }
