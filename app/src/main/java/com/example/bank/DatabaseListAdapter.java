@@ -49,7 +49,7 @@ public class DatabaseListAdapter extends BaseAdapter {
         fname.setText("First Name: " + mData.get(position).getFname());
         lname.setText("Last Name: " + mData.get(position).getLname());
         username.setText("Username: " + mData.get(position).getUsername());
-        password.setText("Password: " + mData.get(position).getUsername());
+        password.setText("Password: " + mData.get(position).getPassword());
         balance.setText("Balance: " + mData.get(position).getBalance());
         return v;
     }
