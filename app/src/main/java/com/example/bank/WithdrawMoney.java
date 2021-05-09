@@ -37,15 +37,9 @@ public class WithdrawMoney extends AppCompatActivity {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(amount.getText().toString().startsWith("0"))
-                    Toast.makeText(WithdrawMoney.this, "Cannot have leading 0", Toast.LENGTH_SHORT).show();
-                else if (amount.getText().toString().length() == 0)
-                    Toast.makeText(WithdrawMoney.this, "No entry", Toast.LENGTH_SHORT).show();
-                else {
+                if(amount.getText().toString().matches("^\\s*(?=.*[1-9])\\d*(?:\\.\\d{1,2})?\\s*$")) {
                     oldbalance = dbHelper.getBalance(bundle.getString("username"));
-
                     Log.d(TAG, "CHECKING the new amount of oldbalance: " + oldbalance);
-
                     if(check(oldbalance, addAmount)) {
                         Toast.makeText(WithdrawMoney.this,  "Withdraw made", Toast.LENGTH_SHORT).show();
                         float newBalance = Float.parseFloat(oldbalance) - Float.parseFloat(amount.getText().toString());
@@ -58,6 +52,10 @@ public class WithdrawMoney extends AppCompatActivity {
                         Toast.makeText(WithdrawMoney.this, "Do not have enough money", Toast.LENGTH_SHORT).show();
                     }
                 }
+                else if (amount.getText().toString().length() == 0)
+                    Toast.makeText(WithdrawMoney.this, "No entry", Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(WithdrawMoney.this, "Input not valid", Toast.LENGTH_SHORT).show();
             }
         });
     }
