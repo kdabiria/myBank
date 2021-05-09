@@ -37,19 +37,33 @@ public class DepositMoney extends AppCompatActivity {
                 oldbalance = dbHelper.getBalance(bundle.getString("username"));
                 Log.d(TAG, "CHECKING the new amount of oldbalance: " + oldbalance);
 
-                if(amount.getText().toString().matches("^\\s*(?=.*[1-9])\\d*(?:\\.\\d{1,2})?\\s*$")) {
-                    Toast.makeText(DepositMoney.this, "Deposit made", Toast.LENGTH_SHORT).show();
-                    float newBalance = Float.parseFloat(oldbalance) + Float.parseFloat(amount.getText().toString());
-                    Log.d(TAG, "CHECKING the new amount of NEW balance: " + newBalance);
-                    updateDB(String.valueOf(newBalance), bundle.getString("customerID"));
-                    Intent intent = new Intent(getApplicationContext(), AccountInfo.class);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
-                }
-                else if (amount.getText().toString().length() == 0)
+                if (amount.getText().toString().length() == 0 )
                     Toast.makeText(DepositMoney.this, "No entry", Toast.LENGTH_SHORT).show();
+                else if (amount.getText().toString().charAt(0) == '0' && amount.getText().toString().length() >= 3) {
+                    if(amount.getText().toString().charAt(1) == '.' && amount.getText().toString().matches("\\d+(\\.\\d{2})?")) {
+                        Toast.makeText(DepositMoney.this, "Deposit made", Toast.LENGTH_SHORT).show();
+                        float newBalance = Float.parseFloat(oldbalance) + Float.parseFloat(amount.getText().toString());
+                        Log.d(TAG, "CHECKING the new amount of NEW balance: " + newBalance);
+                        updateDB(String.valueOf(newBalance), bundle.getString("customerID"));
+                        Intent intent = new Intent(getApplicationContext(), AccountInfo.class);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    }
+                    else
+                        Toast.makeText(DepositMoney.this, "Input not valid", Toast.LENGTH_SHORT).show();
+                }
                 else{
-                    Toast.makeText(DepositMoney.this, "Input not valid", Toast.LENGTH_SHORT).show();
+                    if(amount.getText().toString().matches("^(?=.*[1-9])\\d*(?:\\.\\d{2})?$")) {
+                        Toast.makeText(DepositMoney.this, "Deposit made", Toast.LENGTH_SHORT).show();
+                        float newBalance = Float.parseFloat(oldbalance) + Float.parseFloat(amount.getText().toString());
+                        Log.d(TAG, "CHECKING the new amount of NEW balance: " + newBalance);
+                        updateDB(String.valueOf(newBalance), bundle.getString("customerID"));
+                        Intent intent = new Intent(getApplicationContext(), AccountInfo.class);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    }
+                    else
+                        Toast.makeText(DepositMoney.this, "Input not valid", Toast.LENGTH_SHORT).show();
                 }
 
             }
