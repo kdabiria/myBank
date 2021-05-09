@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                     password.setText("");
                     startActivity(intent);
                 }
-                else if (username_db.equals("admin")){
+                else if (check && username_db.equals("admin")){
                     if (loginCheck())
                         startActivity(new Intent(getApplicationContext(), Admin.class));
                 }
@@ -78,17 +78,16 @@ public class MainActivity extends AppCompatActivity {
         String user = username.getText().toString();
         String pass = password.getText().toString();
         Log.d(TAG, "yoyo: " + user + " " + pass);
+
         if (user.equals("") || pass.equals("")) {
             Toast.makeText(MainActivity.this, "Fields can't be null", Toast.LENGTH_SHORT).show();
         }
         else {
             try {
-                Log.d(TAG, "yoyo2: ");
                 ArrayList<String> res = dbhelper.checkUserPass(user, pass);
                 username_db = res.get(0);
                 String checkUse = res.get(0);
                 String checkPass = res.get(1);
-                Log.d(TAG, "lalalala!!!!!!!!!!!!!" + checkUse + checkPass);
                 //            boolean checkUse = dbhelper.checkUsername(user);
                 //            boolean checkPass = dbhelper.checkPassword(pass);
                 customerID = dbhelper.getID(user);
@@ -103,7 +102,6 @@ public class MainActivity extends AppCompatActivity {
                     return false;
                 }
             } catch (Exception e) {
-                Log.d(TAG, "yoyo2: ");
                 e.printStackTrace();
             }
 
