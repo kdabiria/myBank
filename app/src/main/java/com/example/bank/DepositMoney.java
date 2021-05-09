@@ -36,11 +36,8 @@ public class DepositMoney extends AppCompatActivity {
             public void onClick(View v) {
                 oldbalance = dbHelper.getBalance(bundle.getString("username"));
                 Log.d(TAG, "CHECKING the new amount of oldbalance: " + oldbalance);
-                if(amount.getText().toString().startsWith("0"))
-                    Toast.makeText(DepositMoney.this, "Cannot have leading 0", Toast.LENGTH_SHORT).show();
-                else if (amount.getText().toString().length() == 0)
-                    Toast.makeText(DepositMoney.this, "No entry", Toast.LENGTH_SHORT).show();
-                else{
+
+                if(amount.getText().toString().matches("^\\s*(?=.*[1-9])\\d*(?:\\.\\d{1,2})?\\s*$")) {
                     Toast.makeText(DepositMoney.this, "Deposit made", Toast.LENGTH_SHORT).show();
                     float newBalance = Float.parseFloat(oldbalance) + Float.parseFloat(amount.getText().toString());
                     Log.d(TAG, "CHECKING the new amount of NEW balance: " + newBalance);
@@ -48,6 +45,11 @@ public class DepositMoney extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), AccountInfo.class);
                     intent.putExtras(bundle);
                     startActivity(intent);
+                }
+                else if (amount.getText().toString().length() == 0)
+                    Toast.makeText(DepositMoney.this, "No entry", Toast.LENGTH_SHORT).show();
+                else{
+                    Toast.makeText(DepositMoney.this, "Input not valid", Toast.LENGTH_SHORT).show();
                 }
 
             }
