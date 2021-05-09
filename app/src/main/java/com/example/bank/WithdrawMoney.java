@@ -31,6 +31,7 @@ public class WithdrawMoney extends AppCompatActivity {
         amount = (EditText) findViewById(R.id.withdraw_money_id);
         confirm = (Button) findViewById(R.id.withdraw_confirm_id);
 
+        //getting information from previous activity
         Bundle bundle = getIntent().getExtras();
 
 
@@ -81,10 +82,21 @@ public class WithdrawMoney extends AppCompatActivity {
         });
     }
 
+    /***
+     * Updating balance in databse
+     * @param balance
+     * @param id
+     */
     private void updateDB(String balance, String id) {
         dbHelper.updateBalance(balance, id);
     }
 
+    /***
+     * Checking if withdraw is valid. (Having enough money)
+     * @param oldbalance
+     * @param addAmount
+     * @return
+     */
     private boolean check(String oldbalance, String addAmount) {
         float newBalance = Float.parseFloat(oldbalance) - Float.parseFloat(amount.getText().toString());
         return newBalance >= 0;

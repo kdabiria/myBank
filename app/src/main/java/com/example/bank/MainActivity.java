@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
 
         dbhelper = new DatabaseHelper(this);
 
+        //setting actions on buttons
+
         register.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -61,12 +63,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.v("Main", "Login botton working!!!!!!" );
+                //checking if username password vaild
                 boolean check = loginCheck();
                 if(check && !username_db.equals("admin")) {
 //                    Account acc = new Account(Float.parseFloat(customerBalance) ,0, customerID);
                     Intent intent = new Intent(getApplicationContext(), AccountInfo.class);
 
-                    //create bundle to pass info
+                    //create bundle to pass info to next activity
                     Bundle bundle = new Bundle();
                     bundle.putString("username", username.getText().toString());
                     bundle.putString("customerID", customerID);
@@ -84,6 +87,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /***
+     * Checking if username and password are valid
+     * @return boolean
+     */
     private boolean loginCheck() {
         String user = username.getText().toString();
         String pass = password.getText().toString();
@@ -98,12 +105,10 @@ public class MainActivity extends AppCompatActivity {
                 username_db = res.get(0);
                 String checkUse = res.get(0);
                 String checkPass = res.get(1);
-                //            boolean checkUse = dbhelper.checkUsername(user);
-                //            boolean checkPass = dbhelper.checkPassword(pass);
+
                 customerID = dbhelper.getID(user);
                 customerBalance = dbhelper.getBalance(user);
 
-                //            if (checkUse && checkPass) {
                 if (!checkPass.isEmpty() && !checkUse.isEmpty()) {
                     Toast.makeText(MainActivity.this, "Login successfully", Toast.LENGTH_SHORT).show();
                     return true;
@@ -119,6 +124,9 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
+    /***
+     * overriding back button
+     */
     @Override
     public void onBackPressed() {
         Toast.makeText(MainActivity.this, "Cannot go back!", Toast.LENGTH_SHORT).show();

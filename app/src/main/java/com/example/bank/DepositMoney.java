@@ -72,6 +72,11 @@ public class DepositMoney extends AppCompatActivity {
 
     }
 
+    /***
+     * Updating the balance for given user
+     * @param balance
+     * @param id
+     */
     private void updateDB(String balance, String id) {
         dbHelper.updateBalance(balance, id);
     }

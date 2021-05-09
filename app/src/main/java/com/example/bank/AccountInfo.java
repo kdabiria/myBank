@@ -12,6 +12,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/***
+ *AccountInfo class will display user information
+ */
+
 public class AccountInfo extends AppCompatActivity {
 
     private final static String TAG = "AccountInfo";
@@ -51,11 +55,12 @@ public class AccountInfo extends AppCompatActivity {
         name.setText("Welcome " + dbHelper.getFirstName(username));
         updateBalance();
 
+        //Setting actions on Buttons
+
         deposit.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                Log.v(TAG, "Deposite clicked!!!");
                 Intent intent = new Intent(getApplicationContext(), DepositMoney.class);
                 Bundle bundle1 = new Bundle();
                 bundle1.putString("username", username);
@@ -103,6 +108,9 @@ public class AccountInfo extends AppCompatActivity {
 
     }
 
+    /***
+     * update and format balance textfield
+     */
     private void updateBalance() {
         Log.d(TAG, "UPDATED THE BALANCE");
         String checkBalance = String.valueOf(dbHelper.getBalance(username));
@@ -111,6 +119,9 @@ public class AccountInfo extends AppCompatActivity {
         balance.setText("Balance:" + String.format("%.2f", numBalance));
     }
 
+    /***
+     * Overrideing back button
+     */
     @Override
     public void onBackPressed() {
         Toast.makeText(AccountInfo.this, "Cannot go back", Toast.LENGTH_SHORT).show();

@@ -42,6 +42,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             onCreate(db);
     }
 
+    /***
+     * Creating default admin
+     * @param db
+     */
     private void createAdmin(SQLiteDatabase db) {
         Log.d(TAG, "ADMIN CREATED!!");
         ContentValues contentValues = new ContentValues();
@@ -57,6 +61,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.insert(TABLE_NAME,null, contentValues);
     }
+
+    /***
+     * adding data to db
+     * @param item
+     * @param item2
+     * @param item3
+     * @param item4
+     * @param item5
+     * @param item6
+     * @return
+     */
     public boolean addData(String item, String item2, String item3, String item4, Float item5, String item6) {
         if (!checkUsername(item3)) {
             SQLiteDatabase db = this.getWritableDatabase();
@@ -66,7 +81,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             contentValues.put(col3, item3);
             contentValues.put(col4, item4);
             contentValues.put(col5, item5);
-            contentValues.put(col6, item6);
+            Log.d(TAG, "checking value of email" + item6);
+            if(item6 == null)
+                contentValues.put(col6, (byte[]) null);
+            else
+                contentValues.put(col6, item6);
 
             Log.d(TAG, "addData: Adding " + item + " " + item2 + " " + item3 + " " + item4 + " " + item5 + " " + item6 +" to " + TABLE_NAME);
             long result = db.insert(TABLE_NAME, null, contentValues);
@@ -77,6 +96,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return false;
     }
 
+    /***
+     * updateing balance for given user
+     * @param item
+     * @param id
+     */
     public void updateBalance(String item, String id) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -87,6 +111,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.update(TABLE_NAME, contentValues,"ID = ?", new String[]{id});
     }
 
+    /***
+     * Retrieving username and password
+     * @param user
+     * @param pass
+     * @return
+     */
     public ArrayList<String> checkUserPass(String user, String pass) {
         ArrayList<String> res = new ArrayList<>();
         String temp = "";
@@ -111,7 +141,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return res;
     }
 
-
+    /***
+     * Checking if username exists in db
+     * @param user
+     * @return
+     */
     public boolean checkUsername(String user) {
         String query = "SELECT USERNAME FROM " + TABLE_NAME + " WHERE "+ col3 + " = ?";
         String[] whereArgs = {user};
@@ -124,7 +158,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return count >= 1;
     }
 
-
+    /***
+     * Retrieving balance for given user
+     * @param user
+     * @return
+     */
     public String getBalance(String user) {
         String amount = "0";
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + col3 + " = ?";
@@ -140,6 +178,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return amount;
     }
 
+    /***
+     * Retrieving first name for given user
+     * @param user
+     * @return
+     */
     public String getFirstName(String user) {
         String fname = "";
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + col3 + " = ?";
@@ -155,6 +198,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return fname;
     }
 
+    /***
+     * Retrieving last name for given user
+     * @param user
+     * @return
+     */
     public String getLasttName(String user) {
         String lname = "";
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + col3 + " = ?";
@@ -170,6 +218,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return lname;
     }
 
+    /***
+     * Retrieving email for given user
+     * @param user
+     * @return
+     */
     public String getEmail(String user) {
         String email = "";
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + col3 + " = ?";
@@ -185,6 +238,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return email;
     }
 
+    /***
+     * Retrieving ID for the given user
+     * @param user
+     * @return
+     */
     public String getID(String user) {
         String id = "NONE";
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + col3 + " = ?";
@@ -201,6 +259,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return id;
     }
 
+    /***
+     * Retrieving all the information in db
+     * @return
+     */
     public Cursor getAllData() {
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE_NAME;
@@ -208,6 +270,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return data;
     }
 
+    /***
+     * updating passowrd given the user
+     * @param username
+     * @param password
+     * @return
+     */
     public Boolean updatePassword(String username, String password) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();

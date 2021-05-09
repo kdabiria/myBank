@@ -55,9 +55,6 @@ public class Reset extends AppCompatActivity {
                 }
                 else
                     Toast.makeText(Reset.this, "Password Not Matching", Toast.LENGTH_LONG).show();
-
-
-
             }
         });
     }

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+
 public class Admin extends AppCompatActivity {
 
     private static final String TAG = "Admin";
@@ -22,6 +23,8 @@ public class Admin extends AppCompatActivity {
 
         logout = (Button) findViewById(R.id.admin_logout_id);
         viewDatabase = (Button) findViewById(R.id.viewDatabase_id);
+
+        // setting action on buttons
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,6 +43,9 @@ public class Admin extends AppCompatActivity {
         });
     }
 
+    /***
+     * Overriding back button
+     */
     @Override
     public void onBackPressed() {
         Toast.makeText(Admin.this, "Cannot go back!", Toast.LENGTH_SHORT).show();

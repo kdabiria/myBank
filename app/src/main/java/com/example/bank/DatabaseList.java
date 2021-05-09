@@ -33,29 +33,25 @@ import java.util.List;
         populateListView();
     }
 
+     /***
+      * Putting information in the listview
+      */
     private void populateListView() {
         Log.d(TAG, "Dispalying data in the ListView");
 
         Cursor data = dbHelper.getAllData();
-//        ArrayList<String> listData = new ArrayList<>();
 
         listData = new ArrayList<>();
 
         while (data.moveToNext()) {
             listData.add(new User(data.getString(0),data.getString(1),data.getString(2),data.getString(3),data.getString(4), data.getString(5), data.getString(6)));
-//            listData.add(data.getString(0));
-//            listData.add(data.getString(1));
-//            listData.add(data.getString(2));
-//            listData.add(data.getString(3));
-//            listData.add(data.getString(4));
-//            listData.add(data.getString(5));
+
         }
 
         listData.remove(0);
 
         Log.d(TAG, "checking data " + listData.size());
-//        ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listData);
-//        mListView.setAdapter(adapter);
+
         if (!listData.isEmpty()) {
             myAdapter = new DatabaseListAdapter(this, listData);
             mListView.setAdapter(myAdapter);

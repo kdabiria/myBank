@@ -49,7 +49,9 @@ public class RegisterActivity extends AppCompatActivity {
                 String newEntry4 = password.getText().toString();
                 if(balance.getText().toString().matches("^\\s*(?=.*[1-9])\\d*(?:\\.\\d{1,2})?\\s*$"))
                     newEntry5 = Float.parseFloat(balance.getText().toString());
-                String newEntry6 = email.getText().toString();
+                String newEntry6 = null;
+                if(email.getText().toString().length() != 0)
+                    newEntry6 = email.getText().toString();
                 if(newEntry3.length() != 0 && newEntry4.length() != 0 && newEntry.length() != 0 && newEntry2.length() != 0 ) {
                     check = AddData(newEntry, newEntry2, newEntry3, newEntry4, newEntry5, newEntry6);
                     Log.d(TAG, check + "!!!!!");

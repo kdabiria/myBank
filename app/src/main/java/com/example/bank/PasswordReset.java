@@ -29,6 +29,7 @@ public class PasswordReset extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String user = username.getText().toString();
+                //chcking to see if the user exists
                 Boolean chekuser = dbHelper.checkUsername(user);
 
                 if(chekuser) {
