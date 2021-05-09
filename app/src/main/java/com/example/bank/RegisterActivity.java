@@ -18,9 +18,11 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText username;
     private EditText balance;
     private EditText password;
+    private EditText email;
     private Button createAcc;
     DatabaseHelper mDatabaseHelper;
     private boolean check;
+    private Float newEntry5;
 
 
     @Override
@@ -33,6 +35,7 @@ public class RegisterActivity extends AppCompatActivity {
         username = (EditText) findViewById(R.id.Username_id);
         password = (EditText) findViewById(R.id.reg_password_id);
         balance = (EditText) findViewById(R.id.reg_balance_id);
+        email = (EditText) findViewById(R.id.reg_email_id);
         createAcc = (Button) findViewById(R.id.create_acc_id);
 
         mDatabaseHelper = new DatabaseHelper(this);
@@ -44,15 +47,17 @@ public class RegisterActivity extends AppCompatActivity {
                 String newEntry2 = lastName.getText().toString();
                 String newEntry3 = username.getText().toString();
                 String newEntry4 = password.getText().toString();
-                Float newEntry5 = Float.parseFloat(balance.getText().toString());
-                if(username.length() != 0) {
-                    check = AddData(newEntry, newEntry2, newEntry3, newEntry4, newEntry5);
+                if(balance.getText().toString().trim().length() != 0 && balance.getText().toString().matches("^\\s*(?=.*[1-9])\\d*(?:\\.\\d{1,2})?\\s*$"))
+                    newEntry5 = Float.parseFloat(balance.getText().toString());
+                String newEntry6 = email.getText().toString();
+                if(username.getText().toString().length() != 0 && password.getText().toString().length() != 0 && firstName.getText().toString().length() != 0 && lastName.getText().toString().length() != 0 ) {
+                    check = AddData(newEntry, newEntry2, newEntry3, newEntry4, newEntry5, newEntry6);
                     Log.d(TAG, check + "!!!!!");
                     if(check)
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 }
                 else
-                    toastMeesage("You must put something in the text field!");
+                    toastMeesage("You must fill the required fields!");
             }
         });
 
@@ -60,8 +65,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    public boolean AddData(String newEntry, String newEntry2, String newEntry3, String newEntry4, Float newEntry5) {
-        boolean insertData = mDatabaseHelper.addData(newEntry, newEntry2, newEntry3, newEntry4, newEntry5 );
+    public boolean AddData(String newEntry, String newEntry2, String newEntry3, String newEntry4, Float newEntry5, String newEntry6) {
+        boolean insertData = mDatabaseHelper.addData(newEntry, newEntry2, newEntry3, newEntry4, newEntry5, newEntry6 );
 
         if(insertData) {
             toastMeesage("Successfully Created Account!");

@@ -7,14 +7,16 @@ public class User {
     String username;
     String password;
     String balance;
+    String email;
 
-    public User(String id, String fname, String lname, String username, String password, String balance) {
+    public User(String id, String fname, String lname, String username, String password, String balance, String email) {
         this.id = id;
         this.fname = fname;
         this.lname = lname;
         this.username = username;
         this.password = password;
         this.balance = balance;
+        this.email = email;
     }
 
     public String getId() {
@@ -39,5 +41,9 @@ public class User {
 
     public String getBalance() {
         return balance;
+    }
+
+    public String getEmail() {
+        return email;
     }
 }

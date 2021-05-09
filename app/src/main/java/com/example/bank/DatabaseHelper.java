@@ -23,6 +23,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String col3 = "USERNAME";
     private static final String col4 = "PASSWORD";
     private static final String col5 = "BALANCE";
+    private static final String col6 = "EMAIL";
 
     public DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null,1);
@@ -30,7 +31,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTable = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT,FIRSTNAME TEXT,LASTNAME TEXT, USERNAME TEXT, PASSWORD TEXT, BALANCE TEXT)";
+        String createTable = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT,FIRSTNAME TEXT,LASTNAME TEXT, USERNAME TEXT, PASSWORD TEXT, BALANCE TEXT, EMAIL TEXT)";
         db.execSQL(createTable);
         createAdmin(db);
     }
@@ -52,10 +53,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(col4, "iam@admin");
 //        contentValues.put(col5, (byte[]) null);
         contentValues.put(col5, "admin");
+        contentValues.put(col6, "admin@uci.edu");
 
         db.insert(TABLE_NAME,null, contentValues);
     }
-    public boolean addData(String item, String item2, String item3, String item4, Float item5) {
+    public boolean addData(String item, String item2, String item3, String item4, Float item5, String item6) {
         if (!checkUsername(item3)) {
             SQLiteDatabase db = this.getWritableDatabase();
             ContentValues contentValues = new ContentValues();
@@ -64,8 +66,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             contentValues.put(col3, item3);
             contentValues.put(col4, item4);
             contentValues.put(col5, item5);
+            contentValues.put(col6, item6);
 
-            Log.d(TAG, "addData: Adding " + item + " " + item2 + " " + item3 + " " + item4 + " " + item5 + " to " + TABLE_NAME);
+            Log.d(TAG, "addData: Adding " + item + " " + item2 + " " + item3 + " " + item4 + " " + item5 + " " + item6 +" to " + TABLE_NAME);
             long result = db.insert(TABLE_NAME, null, contentValues);
 
             return result != -1;
