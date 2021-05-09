@@ -52,7 +52,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(col3, "admin");
         contentValues.put(col4, "iam@admin");
 //        contentValues.put(col5, (byte[]) null);
-        contentValues.put(col5, "admin");
+        contentValues.put(col5, "0");
         contentValues.put(col6, "admin@uci.edu");
 
         db.insert(TABLE_NAME,null, contentValues);

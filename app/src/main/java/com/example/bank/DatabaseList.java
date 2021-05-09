@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
 
     private static final String TAG = "DatabaseList";
     private ListView mListView;
+    private TextView empty;
     private DatabaseHelper dbHelper;
     private DatabaseListAdapter myAdapter;
     private List<User> listData;
@@ -25,6 +27,7 @@ import java.util.List;
         setContentView(R.layout.activity_database_list);
         
         mListView = (ListView) findViewById(R.id.listView);
+        empty = (TextView) findViewById(R.id.empty_id);
         dbHelper = new DatabaseHelper(this);
         
         populateListView();
@@ -50,11 +53,14 @@ import java.util.List;
 
         listData.remove(0);
 
-        Log.d(TAG, "checking data " + listData.size() + listData.get(0).getFname());
+        Log.d(TAG, "checking data " + listData.size());
 //        ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listData);
 //        mListView.setAdapter(adapter);
-
-        myAdapter = new DatabaseListAdapter(this, listData);
-        mListView.setAdapter(myAdapter);
+        if (!listData.isEmpty()) {
+            myAdapter = new DatabaseListAdapter(this, listData);
+            mListView.setAdapter(myAdapter);
+        }
+        else
+            mListView.setEmptyView(empty);
     }
 }
