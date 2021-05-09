@@ -77,14 +77,13 @@ public class MainActivity extends AppCompatActivity {
     private boolean loginCheck() {
         String user = username.getText().toString();
         String pass = password.getText().toString();
-
+        Log.d(TAG, "yoyo: " + user + " " + pass);
         if (user.equals("") || pass.equals("")) {
             Toast.makeText(MainActivity.this, "Fields can't be null", Toast.LENGTH_SHORT).show();
         }
         else {
             try {
-
-
+                Log.d(TAG, "yoyo2: ");
                 ArrayList<String> res = dbhelper.checkUserPass(user, pass);
                 username_db = res.get(0);
                 String checkUse = res.get(0);
@@ -104,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
                     return false;
                 }
             } catch (Exception e) {
+                Log.d(TAG, "yoyo2: ");
                 e.printStackTrace();
             }
 

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class Admin extends AppCompatActivity {
 
@@ -37,5 +38,10 @@ public class Admin extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), DatabaseList.class));
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(Admin.this, "Cannot go back!", Toast.LENGTH_SHORT).show();
     }
 }
