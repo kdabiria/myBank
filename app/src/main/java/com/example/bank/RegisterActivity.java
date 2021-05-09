@@ -47,14 +47,16 @@ public class RegisterActivity extends AppCompatActivity {
                 String newEntry2 = lastName.getText().toString();
                 String newEntry3 = username.getText().toString();
                 String newEntry4 = password.getText().toString();
-                if(balance.getText().toString().trim().length() != 0 && balance.getText().toString().matches("^\\s*(?=.*[1-9])\\d*(?:\\.\\d{1,2})?\\s*$"))
+                if(balance.getText().toString().matches("^\\s*(?=.*[1-9])\\d*(?:\\.\\d{1,2})?\\s*$"))
                     newEntry5 = Float.parseFloat(balance.getText().toString());
                 String newEntry6 = email.getText().toString();
-                if(username.getText().toString().length() != 0 && password.getText().toString().length() != 0 && firstName.getText().toString().length() != 0 && lastName.getText().toString().length() != 0 ) {
+                if(newEntry3.length() != 0 && newEntry4.length() != 0 && newEntry.length() != 0 && newEntry2.length() != 0 ) {
                     check = AddData(newEntry, newEntry2, newEntry3, newEntry4, newEntry5, newEntry6);
                     Log.d(TAG, check + "!!!!!");
-                    if(check)
+                    if(check) {
+                        toastMeesage("Successfully Created Account!");
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    }
                 }
                 else
                     toastMeesage("You must fill the required fields!");
@@ -66,14 +68,20 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public boolean AddData(String newEntry, String newEntry2, String newEntry3, String newEntry4, Float newEntry5, String newEntry6) {
+        boolean checkuser = mDatabaseHelper.checkUsername(newEntry3);
         boolean insertData = mDatabaseHelper.addData(newEntry, newEntry2, newEntry3, newEntry4, newEntry5, newEntry6 );
 
-        if(insertData) {
-            toastMeesage("Successfully Created Account!");
+        if(checkuser) {
+            toastMeesage("Username already Exist!");
+            return false;
+        }
+        else if(insertData) {
+
             return true;
         }
         else {
-            toastMeesage("Something went wrong!");
+//            toastMeesage("Something went wrong!");
+            toastMeesage("You must fill the required fields!");
             return false;
         }
 
