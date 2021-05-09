@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText password;
     private Button loginButton;
     private TextView register;
+    private TextView forgot;
     DatabaseHelper dbhelper;
     private String customerID;
     private String username_db;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         loginButton = (Button) findViewById(R.id.login_id);
         register = (TextView) findViewById(R.id.reg_id);
+        forgot = (TextView) findViewById(R.id.forgot_id);
 
         dbhelper = new DatabaseHelper(this);
 
@@ -44,6 +46,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.v("Main", "reg clicked!!!!!!" );
                 startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
+            }
+        });
+
+        forgot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "Clicked forgot!");
+                startActivity(new Intent(getApplicationContext(), PasswordReset.class));
             }
         });
 

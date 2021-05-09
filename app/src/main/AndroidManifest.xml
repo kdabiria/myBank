@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Bank">
-        <activity android:name=".ShowInfo"></activity>
+        <activity android:name=".Reset"></activity>
+        <activity android:name=".PasswordReset" />
+        <activity android:name=".ShowInfo" />
         <activity android:name=".DatabaseList" />
         <activity android:name=".Admin" />
         <activity android:name=".WithdrawMoney" />

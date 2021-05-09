@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:background="@color/cardview_dark_background"
+    tools:context=".Reset">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/username_reset_text_id"
+        android:layout_marginTop="50dp"
+        android:textSize="20dp"
+        android:textColor="@color/white"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/password_rest_id"
+        android:layout_marginTop="50dp"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textColorHint="@color/white"
+        android:layout_below="@+id/username_reset_text_id" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/repassword_rest_id"
+        android:layout_marginTop="50dp"
+        android:inputType="textPassword"
+        android:hint="Retype Password"
+        android:textColorHint="@color/white"
+        android:layout_below="@+id/password_rest_id" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/confirm_reset_btn_id"
+        android:text="Confirm"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:layout_marginTop="50dp"
+        app:backgroundTint="#424242"
+        android:layout_below="@+id/repassword_rest_id"/>
+
+
+</RelativeLayout>
