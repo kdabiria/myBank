@@ -19,6 +19,7 @@ public class AccountInfo extends AppCompatActivity {
     private Button deposit;
     private Button withdraw;
     private Button logout;
+    private Button myInfo;
     DatabaseHelper dbHelper;
     String username;
     String customerID;
@@ -43,6 +44,7 @@ public class AccountInfo extends AppCompatActivity {
         balance = (TextView) findViewById(R.id.balance_id);
         deposit = (Button) findViewById(R.id.deposit_id);
         withdraw = (Button) findViewById(R.id.withdraw_id);
+        myInfo = (Button) findViewById(R.id.myInfo_id);
         logout = (Button) findViewById(R.id.logout_button_id);
 
         name = (TextView) findViewById(R.id.fnam_id);
@@ -84,6 +86,18 @@ public class AccountInfo extends AppCompatActivity {
             public void onClick(View v) {
                 Log.v(TAG, "withdraw clicked!!!");
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            }
+        });
+
+        myInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "CLICLED myInof");
+                Intent intent = new Intent(getApplicationContext(), ShowInfo.class);
+                Bundle bundle1 = new Bundle();
+                bundle1.putString("username", username);
+                intent.putExtras(bundle1);
+                startActivity(intent);
             }
         });
 

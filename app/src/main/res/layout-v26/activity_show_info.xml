@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cardview_dark_background"
+    tools:context=".ShowInfo">
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/myInfo_listView"
+        />
+
+<!--    <TextView-->
+<!--        android:id="@+id/myInfo_fname_id"-->
+<!--        android:layout_width="144dp"-->
+<!--        android:layout_height="49dp"-->
+<!--        android:layout_marginStart="133dp"-->
+<!--        android:layout_marginLeft="133dp"-->
+<!--        android:layout_marginTop="200dp"-->
+<!--        android:layout_marginEnd="134dp"-->
+<!--        android:layout_marginRight="134dp"-->
+<!--        android:autoSizeTextType="uniform"-->
+<!--        android:lines="1"-->
+<!--        android:text="First Name"-->
+<!--        android:textColor="#FFFFFF"-->
+<!--        android:textSize="14sp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/myInfo_lname_id"-->
+<!--        android:layout_width="144dp"-->
+<!--        android:layout_height="49dp"-->
+<!--        android:layout_marginStart="133dp"-->
+<!--        android:layout_marginLeft="133dp"-->
+<!--        android:layout_marginTop="25dp"-->
+<!--        android:layout_marginEnd="134dp"-->
+<!--        android:layout_marginRight="134dp"-->
+<!--        android:autoSizeTextType="uniform"-->
+<!--        android:lines="1"-->
+<!--        android:text="Last Name"-->
+<!--        android:textColor="#FFFFFF"-->
+<!--        android:textSize="14sp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/myInfo_fname_id" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/myInfo_email_id"-->
+<!--        android:layout_width="144dp"-->
+<!--        android:layout_height="49dp"-->
+<!--        android:layout_marginStart="133dp"-->
+<!--        android:layout_marginLeft="133dp"-->
+<!--        android:layout_marginTop="25dp"-->
+<!--        android:layout_marginEnd="134dp"-->
+<!--        android:layout_marginRight="134dp"-->
+<!--        android:autoSizeTextType="uniform"-->
+<!--        android:lines="1"-->
+<!--        android:text="email"-->
+<!--        android:textColor="#FFFFFF"-->
+<!--        android:textSize="14sp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/myInfo_lname_id" />-->
+
+</LinearLayout>

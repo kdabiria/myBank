@@ -155,6 +155,36 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return fname;
     }
 
+    public String getLasttName(String user) {
+        String lname = "";
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + col3 + " = ?";
+        String[] whereArgs = {user};
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, whereArgs);
+
+        while (cursor.moveToNext())
+            lname = cursor.getString(2);
+
+        Log.d(TAG, "checking the value for balance : " + lname);
+        return lname;
+    }
+
+    public String getEmail(String user) {
+        String email = "";
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + col3 + " = ?";
+        String[] whereArgs = {user};
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, whereArgs);
+
+        while (cursor.moveToNext())
+            email = cursor.getString(6);
+
+        Log.d(TAG, "checking the value for balance : " + email);
+        return email;
+    }
+
     public String getID(String user) {
         String id = "NONE";
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + col3 + " = ?";
