@@ -15,6 +15,7 @@
         android:ems="10"
         android:hint="Amount"
         android:inputType="numberDecimal"
+        android:textColor="#BEB7B4"
         android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

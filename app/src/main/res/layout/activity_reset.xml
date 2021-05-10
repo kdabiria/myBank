@@ -22,6 +22,7 @@
         android:id="@+id/password_rest_id"
         android:layout_marginTop="50dp"
         android:hint="Password"
+        android:textColor="#BEB7B4"
         android:inputType="textPassword"
         android:textColorHint="@color/white"
         android:layout_below="@+id/username_reset_text_id" />
@@ -33,6 +34,7 @@
         android:layout_marginTop="50dp"
         android:inputType="textPassword"
         android:hint="Retype Password"
+        android:textColor="#BEB7B4"
         android:textColorHint="@color/white"
         android:layout_below="@+id/password_rest_id" />
 
