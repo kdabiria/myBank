@@ -56,7 +56,7 @@ public class WithdrawMoney extends AppCompatActivity {
                             Toast.makeText(WithdrawMoney.this, "Do not have enough money", Toast.LENGTH_SHORT).show();
                     }
                     else
-                        Toast.makeText(WithdrawMoney.this, "Input not valid", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(WithdrawMoney.this, "invalid_input", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     if(amount.getText().toString().matches("^(?=.*[1-9])\\d*(?:\\.\\d{2})?$")) {
@@ -74,7 +74,7 @@ public class WithdrawMoney extends AppCompatActivity {
                             Toast.makeText(WithdrawMoney.this, "Do not have enough money", Toast.LENGTH_SHORT).show();
                     }
                     else
-                        Toast.makeText(WithdrawMoney.this, "Input not valid", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(WithdrawMoney.this, "invalid_input", Toast.LENGTH_SHORT).show();
 
                 }
 

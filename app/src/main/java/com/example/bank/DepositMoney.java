@@ -50,7 +50,7 @@ public class DepositMoney extends AppCompatActivity {
                         startActivity(intent);
                     }
                     else
-                        Toast.makeText(DepositMoney.this, "Input not valid", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DepositMoney.this, "invalid_input", Toast.LENGTH_SHORT).show();
                 }
                 else{
                     if(amount.getText().toString().matches("^(?=.*[1-9])\\d*(?:\\.\\d{2})?$")) {
@@ -63,7 +63,7 @@ public class DepositMoney extends AppCompatActivity {
                         startActivity(intent);
                     }
                     else
-                        Toast.makeText(DepositMoney.this, "Input not valid", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DepositMoney.this, "invalid_input", Toast.LENGTH_SHORT).show();
                 }
 
             }
