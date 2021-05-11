@@ -12,9 +12,7 @@
 
 ## Description
 
-The app is design as a simple bank application where users can register and create a bank account. 
-
-The first stage is a build phase, which application is at risk with some vulnerabilities that exist in our coding
+The app is designed as a simple bank application in  which users can register and create bank account. The first stage is in the build phase in which application is at risk with some vulnerabilities that are present in our source code.
 
 ---
 
@@ -34,10 +32,11 @@ The first stage is a build phase, which application is at risk with some vulnera
 
 - Then click finish.
 
-- After createing your virtual device on top right choose the device and click the green Run app button.
+- After creating your virtual device on top right choose the device and click the green Run app button.
 
   [Back To The Top](#myBank)
 
   
 
   
+
