@@ -22,7 +22,9 @@ The first stage is a build phase, which application is at risk with some vulnera
 
 #### Installation
 
-- Download Android Studio (https://developer.android.com/studio)Clone the project
+- Download Android Studio (https://developer.android.com/studio)
+
+- Clone the project
 
 - Open the project from Android Studio.
 
