@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -54,7 +56,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 //        contentValues.put(col2, (byte[]) null);
         contentValues.put(col2, "admin");
         contentValues.put(col3, "admin");
-        contentValues.put(col4, "iam@admin");
+        contentValues.put(col4, "5456bff3949bdb3461939a7a85898fd1df345638ad2d355aeb59db2852120");
 //        contentValues.put(col5, (byte[]) null);
         contentValues.put(col5, "0");
         contentValues.put(col6, "admin@uci.edu");
@@ -79,7 +81,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             contentValues.put(col1, item);
             contentValues.put(col2, item2);
             contentValues.put(col3, item3);
-            contentValues.put(col4, item4);
+            contentValues.put(col4, hash(item4) );
             contentValues.put(col5, item5);
             contentValues.put(col6, item6);
 
@@ -89,6 +91,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
         return false;
+    }
+
+    public String hash(String pass) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            digest.update(pass.getBytes());
+            byte messageDigest[] = digest.digest();
+
+            //create Hex string
+            StringBuffer hexString = new StringBuffer();
+            for(int i = 0; i < messageDigest.length; i++)
+                hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
+            Log.d(TAG, hexString.toString());
+            return hexString.toString();
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
     /***

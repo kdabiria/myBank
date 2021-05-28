@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
                 boolean checkUse = dbhelper.checkUsername(user);
                 if (checkUse)
                     username_db = dbhelper.getUsername(user);
-                boolean checkPass = dbhelper.checkPassword(pass);
+                boolean checkPass = dbhelper.checkPassword(dbhelper.hash(pass));
                 customerID = dbhelper.getID(user);
                 customerBalance = dbhelper.getBalance(user);
 
