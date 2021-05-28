@@ -83,7 +83,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             contentValues.put(col5, item5);
             contentValues.put(col6, item6);
 
-            Log.d(TAG, "addData: Adding " + item + " " + item2 + " " + item3 + " " + item4 + " " + item5 + " " + item6 +" to " + TABLE_NAME);
             long result = db.insert(TABLE_NAME, null, contentValues);
 
             return result != -1;
@@ -108,33 +107,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     /***
-     * Retrieving username and password
-     * @param user
+     * checking if password matches
      * @param pass
      * @return
      */
-    public ArrayList<String> checkUserPass(String user, String pass) {
-        ArrayList<String> res = new ArrayList<>();
-        String temp = "";
-        String temp2 = "";
+    public boolean checkPassword(String pass) {
+        String query = "SELECT PASSWORD FROM " + TABLE_NAME + " WHERE "+ col4 + " = ?";
+        String[] whereArgs = {pass};
+
         SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, whereArgs);
 
-        String query = "SELECT * FROM " + TABLE_NAME + " WHERE USERNAME = '" + user + "' AND PASSWORD = '" + pass + "'";
-        try {
+        int count = cursor.getCount();
 
-            Cursor cursor = db.rawQuery(query, null);
-            while (cursor.moveToNext()) {
-                temp = cursor.getString(3);
-                temp2 = cursor.getString(4);
-            }
-            res.add(temp);
-            res.add(temp2);
-
-        } catch (Exception e) {
-
-        }
-
-        return res;
+        return count >= 1;
     }
 
     /***
@@ -154,6 +140,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return count >= 1;
     }
 
+    public String getUsername(String user) {
+        String username = "";
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + col3 + " = ?";
+        String[] whereArgs = {user};
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, whereArgs);
+
+        while (cursor.moveToNext())
+            username = cursor.getString(3);
+
+        return username;
+    }
+
     /***
      * Retrieving balance for given user
      * @param user
@@ -170,7 +170,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         while (cursor.moveToNext())
             amount = cursor.getString(5);
 
-        Log.d(TAG, "checking the value for balance : " + amount);
         return amount;
     }
 
@@ -190,7 +189,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         while (cursor.moveToNext())
             fname = cursor.getString(1);
 
-        Log.d(TAG, "checking the value for balance : " + fname);
         return fname;
     }
 
@@ -210,7 +208,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         while (cursor.moveToNext())
             lname = cursor.getString(2);
 
-        Log.d(TAG, "checking the value for balance : " + lname);
         return lname;
     }
 
@@ -230,7 +227,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         while (cursor.moveToNext())
             email = cursor.getString(6);
 
-        Log.d(TAG, "checking the value for balance : " + email);
         return email;
     }
 
@@ -251,7 +247,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         while (cursor.moveToNext())
             id = cursor.getString(0);
 
-        Log.d(TAG, "checking the value for balance : " + id);
         return id;
     }
 

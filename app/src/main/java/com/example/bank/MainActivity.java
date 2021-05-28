@@ -94,22 +94,20 @@ public class MainActivity extends AppCompatActivity {
     private boolean loginCheck() {
         String user = username.getText().toString();
         String pass = password.getText().toString();
-        Log.d(TAG, "yoyo: " + user + " " + pass);
 
         if (user.equals("") || pass.equals("")) {
             Toast.makeText(MainActivity.this, "Fields can't be null", Toast.LENGTH_SHORT).show();
         }
         else {
             try {
-                ArrayList<String> res = dbhelper.checkUserPass(user, pass);
-                username_db = res.get(0);
-                String checkUse = res.get(0);
-                String checkPass = res.get(1);
-
+                boolean checkUse = dbhelper.checkUsername(user);
+                if (checkUse)
+                    username_db = dbhelper.getUsername(user);
+                boolean checkPass = dbhelper.checkPassword(pass);
                 customerID = dbhelper.getID(user);
                 customerBalance = dbhelper.getBalance(user);
 
-                if (!checkPass.isEmpty() && !checkUse.isEmpty()) {
+                if (checkPass && checkUse) {
                     Toast.makeText(MainActivity.this, "Login successfully", Toast.LENGTH_SHORT).show();
                     return true;
                 } else {
