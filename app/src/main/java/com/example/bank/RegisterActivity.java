@@ -47,13 +47,11 @@ public class RegisterActivity extends AppCompatActivity {
                 String newEntry2 = lastName.getText().toString();
                 String newEntry3 = username.getText().toString();
                 String newEntry4 = password.getText().toString();
+                String newEntry6 = email.getText().toString();
                 boolean balanceCheck = checkBalance(balance.getText().toString());
                 if(balanceCheck)
                     newEntry5 = Float.parseFloat(balance.getText().toString());
-                String newEntry6 = null;
-                if(email.getText().toString().length() != 0)
-                    newEntry6 = email.getText().toString();
-                if(newEntry3.length() != 0 && newEntry4.length() != 0 && newEntry.length() != 0 && newEntry2.length() != 0) {
+                if(newEntry3.length() != 0 && newEntry4.length() != 0 && newEntry.length() != 0 && newEntry2.length() != 0 && newEntry6.length() != 0) {
                     if(balanceCheck) {
                         check = AddData(newEntry, newEntry2, newEntry3, newEntry4, newEntry5, newEntry6);
                         Log.d(TAG, check + "!!!!!");

@@ -81,11 +81,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             contentValues.put(col3, item3);
             contentValues.put(col4, item4);
             contentValues.put(col5, item5);
-            Log.d(TAG, "checking value of email" + item6);
-            if(item6 == null)
-                contentValues.put(col6, (byte[]) null);
-            else
-                contentValues.put(col6, item6);
+            contentValues.put(col6, item6);
 
             Log.d(TAG, "addData: Adding " + item + " " + item2 + " " + item3 + " " + item4 + " " + item5 + " " + item6 +" to " + TABLE_NAME);
             long result = db.insert(TABLE_NAME, null, contentValues);

@@ -109,7 +109,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:ems="10"
-        android:hint="Email"
+        android:hint="Email*"
         android:textColor="#BEB7B4"
         android:inputType="textEmailAddress"
         android:textColorHint="@color/white"
