@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -48,20 +49,24 @@ public class RegisterActivity extends AppCompatActivity {
                 String newEntry3 = username.getText().toString();
                 String newEntry4 = password.getText().toString();
                 String newEntry6 = email.getText().toString();
+                boolean checkEmail = isValidEmail(newEntry6);
                 boolean balanceCheck = checkBalance(balance.getText().toString());
                 if(balanceCheck)
                     newEntry5 = Float.parseFloat(balance.getText().toString());
-                if(newEntry3.length() != 0 && newEntry4.length() != 0 && newEntry.length() != 0 && newEntry2.length() != 0 && newEntry6.length() != 0) {
-                    if(balanceCheck) {
-                        check = AddData(newEntry, newEntry2, newEntry3, newEntry4, newEntry5, newEntry6);
-                        Log.d(TAG, check + "!!!!!");
-                        if (check) {
-                            toastMeesage("Successfully Created Account!");
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        }
+                if(newEntry3.length() != 0 && newEntry4.length() != 0 && newEntry.length() != 0 && newEntry2.length() != 0) {
+                    if(checkEmail) {
+                        if (balanceCheck) {
+                            check = AddData(newEntry, newEntry2, newEntry3, newEntry4, newEntry5, newEntry6);
+                            Log.d(TAG, check + "!!!!!");
+                            if (check) {
+                                toastMeesage("Successfully Created Account!");
+                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            }
+                        } else
+                            toastMeesage("Balance Invalid Input");
                     }
                     else
-                        toastMeesage("Balance Invalid Input");
+                        toastMeesage("Invalid Email");
                 }
                 else
                     toastMeesage("You must fill the required fields!");
@@ -101,6 +106,11 @@ public class RegisterActivity extends AppCompatActivity {
             return false;
         }
 
+    }
+
+
+    private boolean isValidEmail(String email) {
+        return !email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
     private void toastMeesage(String message) {
