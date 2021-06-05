@@ -291,7 +291,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Boolean updatePassword(String username, String password) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(col4, password );
+        contentValues.put(col4, hash(password) );
         long result = db.update(TABLE_NAME, contentValues, "USERNAME = ?", new String[]{username});
 
         return result != -1;
