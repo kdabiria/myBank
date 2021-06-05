@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -59,7 +60,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(col4, "5456bff3949bdb3461939a7a85898fd1df345638ad2d355aeb59db2852120");
 //        contentValues.put(col5, (byte[]) null);
         contentValues.put(col5, "0");
-        contentValues.put(col6, "admin@uci.edu");
+        contentValues.put(col6, "bankservicenoreply@gmail.com");
 
         db.insert(TABLE_NAME,null, contentValues);
     }
@@ -251,6 +252,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return email;
     }
 
+//    public List<String> checkEmail(String email) {
+//        String query = "SELECT EMAIL FROM " + TABLE_NAME;
+//
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        Cursor cursor = db.rawQuery(query, null);
+//
+//        int count = cursor.getCount();
+//
+//        return count >= 1;
+//    }
     /***
      * Retrieving ID for the given user
      * @param user
