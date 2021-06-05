@@ -81,7 +81,7 @@ public class PasswordReset extends AppCompatActivity {
         Session session = Session.getInstance(props, new javax.mail.Authenticator(){
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(username, "Uciclass2020");
+                return new PasswordAuthentication(username, "08b98de6953526b184f982b2f2b682a056c977ec1f22947344e1828d496c8a27");
             }
         });
 
