@@ -252,16 +252,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return email;
     }
 
-//    public List<String> checkEmail(String email) {
-//        String query = "SELECT EMAIL FROM " + TABLE_NAME;
-//
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        Cursor cursor = db.rawQuery(query, null);
-//
-//        int count = cursor.getCount();
-//
-//        return count >= 1;
-//    }
     /***
      * Retrieving ID for the given user
      * @param user
