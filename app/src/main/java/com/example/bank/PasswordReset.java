@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import javax.mail.Message;
@@ -54,7 +53,7 @@ public class PasswordReset extends AppCompatActivity {
                 Boolean chekuser = dbHelper.checkUsername(user);
 
                 if(chekuser) {
-                    sendCode("bankservicenoreply@gmail.com", dbHelper.getEmail(user));
+                    sendCode(dbHelper.getEmail(user));
                     showPopup(v);
 //                    Intent intent = new Intent(getApplicationContext(), Reset.class);
 //                    intent.putExtra("username", user);
@@ -71,7 +70,7 @@ public class PasswordReset extends AppCompatActivity {
     }
 
     @SuppressLint("DefaultLocale")
-    private void sendCode(String username, String email) {
+    private void sendCode(String email) {
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
@@ -81,13 +80,13 @@ public class PasswordReset extends AppCompatActivity {
         Session session = Session.getInstance(props, new javax.mail.Authenticator(){
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(username, "08b98de6953526b184f982b2f2b682a056c977ec1f22947344e1828d496c8a27");
+                return new PasswordAuthentication("bankservicenoreply@gmail.com", "Uciclass2020");
             }
         });
 
         try {
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(username));
+            message.setFrom(new InternetAddress("bankservicenoreply@gmail.com"));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
             message.setSubject("Code for reseting password");
             fouDigitRandomNumber = String.format("%04d", random.nextInt(10000));
