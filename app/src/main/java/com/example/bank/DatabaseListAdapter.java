@@ -44,7 +44,6 @@ public class DatabaseListAdapter extends BaseAdapter {
         TextView fname = (TextView) v.findViewById(R.id.admin_fname_id);
         TextView lname = (TextView) v.findViewById(R.id.admin_lname_id);
         TextView username = (TextView) v.findViewById(R.id.admin_username_id);
-        TextView password = (TextView) v.findViewById(R.id.admin_password_id);
         TextView balance = (TextView) v.findViewById(R.id.admin_balance_id);
         TextView email = (TextView) v.findViewById(R.id.admin_email_id);
 
@@ -53,7 +52,6 @@ public class DatabaseListAdapter extends BaseAdapter {
         fname.setText("First Name: " + mData.get(position).getFname());
         lname.setText("Last Name: " + mData.get(position).getLname());
         username.setText("Username: " + mData.get(position).getUsername());
-        password.setText("Password: " + mData.get(position).getPassword());
         balance.setText("Balance: " + String.format("%.2f", Float.parseFloat(mData.get(position).getBalance())));
         Log.d(TAG, "EMIAL is: " + mData.get(position).getEmail());
         if(mData.get(position).getEmail() != null)

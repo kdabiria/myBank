@@ -39,14 +39,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/admin_password_id"
-        android:text="Password"
-        android:textColor="@color/white"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/admin_balance_id"
         android:text="Balance"
         android:textColor="@color/white"

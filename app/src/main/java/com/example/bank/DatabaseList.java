@@ -44,7 +44,7 @@ import java.util.List;
         listData = new ArrayList<>();
 
         while (data.moveToNext()) {
-            listData.add(new User(data.getString(0),data.getString(1),data.getString(2),data.getString(3),data.getString(4), data.getString(5), data.getString(6)));
+            listData.add(new User(data.getString(0),data.getString(1),data.getString(2),data.getString(3), data.getString(5), data.getString(6)));
 
         }
 
